@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'shittydb'
-  spec.version       = '1.0.0'
+  spec.version       = '0.0.0'
   spec.authors       = ['ShittyDB Industries, Ltd.']
   spec.email         = ['info@shittydb.com']
   spec.summary       = %q{A confoundingly fast key-value store}
