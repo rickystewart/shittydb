@@ -28,10 +28,10 @@ class ShittyDBDefaultSetter(object):
         """
         Sets a value in a ShittyDB database.
         Params: 
-        key: key
-        value: value
+          key: key
+          value: value
         Returns:
-        True if operation was done successfully, False otherwise
+         True if operation was done successfully, False otherwise
         """
     def set(self, key, val):
         try:
@@ -58,10 +58,10 @@ class ShittyDBDefaultGetter(object):
     """
     Gets a value in a ShittyDB database.
     Params: 
-    key: key
+      key: key
     Returns:
-    The string value corrresponding to the key if operation was done 
-    successfully, raises a exception explaining the problem otherwise
+      The string value corrresponding to the key if operation was done 
+      successfully, raises a exception explaining the problem otherwise
     """
     def get(self, key):
         try:
@@ -92,10 +92,10 @@ class ShittyDB(object):
     """
     Gets a value in a ShittyDB database.
     Params: 
-    key: key
+      key: key
     Returns:
-    The string value corrresponding to the key if operation was done 
-    successfully, raises a exception explaining the problem otherwise
+      The string value corrresponding to the key if operation was done 
+      successfully, raises a exception explaining the problem otherwise
     """
     def get(self, key):
         return self.__getitem__(key)
@@ -106,10 +106,10 @@ class ShittyDB(object):
     """
     Set a value in a ShittyDB database.
     Params: 
-    key: key
-    value: value
+      key: key
+      value: value
     Returns:
-    True if operation was done successfully, False otherwise
+      True if operation was done successfully, False otherwise
     """
     def set(self, key, value):
         return self.__setitem__(key, value)
