@@ -1,9 +1,9 @@
 import subprocess
 
 def set(key, val):
-    f = open(key, 'w')
-    f.write(val)
-    f.close()
+    with open(key, 'w') as f:
+        f.write(val)
 
 def get(key):
-    return subprocess.check_output(["cat", key])
+    with open(key, 'r') as f:
+        return f.read()
