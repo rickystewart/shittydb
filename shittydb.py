@@ -97,7 +97,7 @@ class ShittyDB(object):
      True if operation was done successfully, False otherwise
   """
   def set(self, key, value):
-    returns self.__setitem__(key, value)
+    return self.__setitem__(key, value)
 
   def __setitem__(self, key, value):
     return self.setter.set(key, value)
