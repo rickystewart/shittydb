@@ -33,6 +33,24 @@ ShittiestDB.set('foo', 'this is really fast');
 ShittiestDB.get('foo');
 ```
 
+```C
+#include <stdlib.h>
+#include "shittydb.h"
+
+int main(int argc, char ** argv) {
+    // Add a key
+    shittydb_set("foo", "It's like greased lightning");
+    
+    // Query a key
+    char * resp = NULL;
+    shittydb_get(&resp, "foo");
+
+    free(resp);
+
+    return EXIT_SUCCESS;
+}
+```
+    
 ShittyDB is certified 100% robust and failsafe with ACID and BASE transactions.
 
 The current release is version 0.0. Please have a look at the source code.
