@@ -33,6 +33,8 @@ ShittiestDB.set('foo', 'this is really fast');
 ShittiestDB.get('foo');
 ```
 
+In C:
+
 ```C
 #include <stdlib.h>
 #include "shittydb.h"
