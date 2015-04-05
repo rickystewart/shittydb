@@ -93,7 +93,7 @@ var ShittyDBDefaultGetter = function () {
  */
 ShittyDBDefaultGetter.prototype.get = function (key) {
     try {
-        return fs.readFileSync(key);
+        return fs.readFileSync(key, {"encoding": "utf-8"});
     } catch (e) {
         throw new Exception("[E4727][CRITICAL] ACCESS ERROR DETECTED, PLEASE FORMAT YOUR COMPUTER FOR FIXING");
     }
