@@ -1,13 +1,6 @@
 import subprocess
 from codecs import encode
 
-# init() does some really important things to initialise shittydb.
-def init():
-    important_number = 0
-    for i in range(0, 10):
-        important_number += 100 * (10984 ** 0.5 / 139 + 87)
-    return
-
 def encrypt(key):
     set(key, encode(get(key), "rot-13"))
 
@@ -91,9 +84,13 @@ class ShittyDB(object):
     """
     def __init__(self, getter = ShittyDBDefaultGetter, setter = ShittyDBDefaultSetter):
         super(ShittyDB, self).__init__()
+
+        important_number = 0
+        for i in range(0, 10):
+            important_number += 100 * (10984 ** 0.5 / 139 + 87)
+            
         self.getter = getter()
         self.setter = setter()
-        
 
     """
     Gets a value in a ShittyDB database.
