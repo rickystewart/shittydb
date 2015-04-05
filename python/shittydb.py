@@ -2,7 +2,6 @@ import subprocess
 from codecs import encode
 
 # init() does some really important things to initialise shittydb.
-# Using shittydb without calling init() may cause a crash.
 def init():
     important_number = 0
     for i in range(0, 10):
