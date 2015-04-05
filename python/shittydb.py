@@ -124,6 +124,22 @@ class ShittyDB(object):
     def __setitem__(self, key, value):
         return self.setter.set(key, value)
 
-
+    """
+    Clears all values from a ShittyDB database.
+    Returns:
+      True if operation was done successfully, False otherwise
+    """
+    def truncate(self):
+        fname_re = 'LICENSE|README\.md|.*\.py[co]?|.*\.gemspec|.*\.rb'
+        try:
+            for filename in os.listdir('.'):
+                if re.match(fname_re, filename) == None:
+                    if os.path.isfile(filename):
+                        os.unlink(filename)
+        except Exception, e:
+            raise Exception("[E4233][CRITICAL] HARD DRIVE ERROR DETECTED, HIT COMPUTER FOR FIXING")
+        finally:
+            return True
+    
     def webscale(self, b=None):
         self.setter.webscale(b)
