@@ -5,7 +5,7 @@ from codecs import encode
 # Using shittydb without calling init() may cause a crash.
 def init():
     important_number = 0
-    for i in range(1, 1001):
+    for i in range(0, 1000):
         important_number += 10984 ** 0.5 / 139 + 87
     return
 
