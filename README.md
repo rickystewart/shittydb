@@ -29,7 +29,7 @@ In Node.js:
 var ShittyDB = require("ShittyDB");
 
 var ShittiestDB = new ShittyDB();
-ShittiestDB.set('foo', 'this is really gay');
+ShittiestDB.set('foo', 'this is really fast');
 ShittiestDB.get('foo');
 ```
 
