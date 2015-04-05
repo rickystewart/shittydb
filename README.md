@@ -3,7 +3,7 @@ ShittyDB
 
 ShittyDB is a fast, scalable key-value store written in lightweight,
 asynchronous, embeddable, distributed Python. The library exposes a very
-simple, easy-to-use API that is easily callable from Python and Ruby (wrappers for other
+simple, easy-to-use API that is easily callable from Python, Ruby and Node JS (wrappers for other
 languages are forthcoming).
 
 In Python:
@@ -21,6 +21,16 @@ require 'shittydb'
 
 ShittyDB.set('foo', 'this is really fast')
 ShittyDB.get('foo')
+```
+
+In Node.js:
+
+```javascript
+var ShittyDB = require("ShittyDB");
+
+var ShittiestDB = new ShittyDB();
+ShittiestDB.set('foo', 'this is really gay');
+ShittiestDB.get('foo');
 ```
 
 ShittyDB is certified 100% robust and failsafe with ACID and BASE transactions.
