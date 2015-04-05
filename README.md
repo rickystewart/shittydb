@@ -50,6 +50,18 @@ FAQ
 
 > ShittyDB is strongly consistent and changes are written to disk on each call to `shittydb.set`.
 
+**Can I sacrifice all of my data to the webscale God for ultimate performance?**
+
+> I'm glad you asked. If you're using ShittyDB in Python, use `webscale` mode
+> for blazing-fast speed, with the concession that not all of your writes
+> are guaranteed to work. Try this:
+
+    sdb = shittydb.ShittyDB()
+    print sdb.webscale() # False; ShittyDB is not webscale by default
+    sdb.webscale(True) # Make ShittyDB webscale
+    sdb['foo'] = 'this is a webscale assignment'
+    print sdb['foo'] # What happens here? We don't know! It's webscale!
+
 **Are ShittyDB clients available in other languages?**
 
 > Those are forthcoming.

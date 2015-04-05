@@ -1,4 +1,4 @@
-import subprocess, os, re
+import subprocess
 from codecs import encode
 
 # init() does some really important things to initialise shittydb.
@@ -23,17 +23,24 @@ class ShittyDBDefaultSetter(object):
     and a value as arguments and returns a boolean signaling success
     """
     def __init__(self):
-        pass
+        self.is_webscale = False
+
+    def webscale(self, b = None):
+        if b is None:
+            return self.is_webscale
+        self.is_webscale = b
     
-        """
-        Sets a value in a ShittyDB database.
-        Params: 
-          key: key
-          value: value
-        Returns:
-         True if operation was done successfully, False otherwise
-        """
+    """
+    Sets a value in a ShittyDB database.
+    Params: 
+    key: key
+    value: value
+    Returns:
+    True if operation was done successfully, False otherwise
+    """
     def set(self, key, val):
+        if self.is_webscale:
+            return True
         try:
             with open(key, 'w') as f:
                 f.write(val)
@@ -117,19 +124,6 @@ class ShittyDB(object):
     def __setitem__(self, key, value):
         return self.setter.set(key, value)
 
-    """
-    Clears all values from a ShittyDB database.
-    Returns:
-      True if operation was done successfully, False otherwise
-    """
-    def truncate(self):
-        fname_re = 'LICENSE|README\.md|.*\.py[co]?|.*\.gemspec|.*\.rb'
-        try:
-            for filename in os.listdir('.'):
-                if re.match(fname_re, filename) == None:
-                    if os.path.isfile(filename):
-                        os.unlink(filename)
-        except Exception, e:
-            raise Exception("[E4233][CRITICAL] HARD DRIVE ERROR DETECTED, HIT COMPUTER FOR FIXING")
-        finally:
-            return True
+
+    def webscale(self, b=None):
+        self.setter.webscale(b)
