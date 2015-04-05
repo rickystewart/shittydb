@@ -139,8 +139,8 @@ ShittyDB.prototype.get = function (key) {
  * @param {String} value
  * @returns {String} True if operation was done successfully, False otherwise
  */
-ShittyDB.prototype.set = function (key) {
-    return this.setter.set(key);
+ShittyDB.prototype.set = function (key, value) {
+    return this.setter.set(key, value);
 };
 
 /**
