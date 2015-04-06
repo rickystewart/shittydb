@@ -7,6 +7,8 @@ def encrypt(key):
 
 decrypt = encrypt
 
+RESET = '\x1b[0m'
+COLORS = map('\x1b[{}m'.format, range(30, 37) + range(40, 47))
 # More things = more cluster SPEED
 # Less things = more data integrity
 FASTTHINGS = ('lightspeed', 'superfast', 'concorde', 'bullettrain', 'thunder',
@@ -31,12 +33,21 @@ class ShittyDBDefaultSetter(object):
     """
     def __init__(self):
         self.is_webscale = False
+        self.distribute = False
 
     def webscale(self, b = None):
         if b is None:
             return self.is_webscale
         self.is_webscale = b
-    
+
+    def be_distribute(self, b = None):
+        if b is None:
+            return self.distribute
+        self.distribute = b
+
+    def get_ENDPOINT(self):
+        return choice(ENDPOINTS) if self.distribute else ''
+
     """
     Sets a value in a ShittyDB database.
     Params: 
@@ -49,7 +60,7 @@ class ShittyDBDefaultSetter(object):
         if self.is_webscale:
             return True
         try:
-            with open(choice(ENDPOINTS) + key, 'w') as f:
+            with open(self.get_ENDPOINT() + key, 'w') as f:
                 f.write(val)
         except Exception, e:
             # TODO: handle exception
@@ -67,8 +78,16 @@ class ShittyDBDefaultGetter(object):
     exception if unsuccesful
     """
     def __init__(self):
-        pass
+        self.distribute = 0
     
+    def be_distribute(self, b = None):
+        if b is None:
+            return self.distribute
+        self.distribute = b
+
+    def getEndpointForGetter(self):
+        return choice(ENDPOINTS) if self.distribute else ''
+
     """
     Gets a value in a ShittyDB database.
     Params: 
@@ -79,7 +98,7 @@ class ShittyDBDefaultGetter(object):
     """
     def get(self, key):
         try:
-            with open(choice(ENDPOINTS) + key, 'r') as f:
+            with open(self.getEndpointForGetter() + key, 'r') as f:
                 return f.read()
         except Exception, e:
             raise Exception("[E4727][CRITICAL] ACCESS ERROR DETECTED, PLEASE FORMAT YOUR COMPUTER FOR FIXING")
@@ -154,3 +173,15 @@ class ShittyDB(object):
     
     def webscale(self, b=None):
         self.setter.webscale(b)
+
+    def distribute(self, b=None):
+        if b:
+            s = 'GOING DISTRIBUTED WITH...'
+            print ''.join([choice(COLORS) + c + RESET for c in s])
+            print
+
+            for t in FASTTHINGS:
+                t = '*\t' + t
+                print ''.join([choice(COLORS) + c + RESET for c in t])
+        self.setter.be_distribute(b)
+        self.getter.be_distribute(b)
