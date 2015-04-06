@@ -11,11 +11,19 @@ public class shittydb {
         }
     }
 
-    public String get(String key) throws IOException, InterruptedException {
-        Process p = Runtime.getRuntime().exec("cat " + key);
-        p.waitFor();
+    public String get(String key) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(key));
+	
+		String o = "";
+		String l;
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        return reader.readLine();
+		while ((l = br.readLine()) != null) {
+			o += l;
+			o += System.lineSeparator();
+		}
+		
+		br.close();
+		
+		return o;
     }
 }
