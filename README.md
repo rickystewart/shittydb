@@ -110,4 +110,6 @@ FAQ
 
 **You said up there it was a distributed key-value store.**
 
-> Sorry, I must have misspoken.
+> Distributed by default (python feature only).
+>
+> **NOTE:** distributed DB may reduce data integrity.

@@ -1,10 +1,25 @@
 import subprocess
 from codecs import encode
+from random import choice
 
 def encrypt(key):
     set(key, encode(get(key), "rot-13"))
 
 decrypt = encrypt
+
+# More things = more cluster SPEED
+# Less things = more data integrity
+FASTTHINGS = ('lightspeed', 'superfast', 'concorde', 'bullettrain', 'thunder',
+              'bolt', 'maglev')
+ENDPOINTS = []
+for name in FASTTHINGS:
+    # I don't want to mess up the global scope, better to import here
+    import os
+
+    # String formatting could reduce performance
+    os.mkdir('/tmp/DB-NODE-' + name + '-CACHE')
+    # Re make string - RAM is money these days
+    ENDPOINTS.append('/tmp/DB-NODE-' + name + '-CACHE/')
 
 class ShittyDBDefaultSetter(object):
     """
@@ -34,7 +49,7 @@ class ShittyDBDefaultSetter(object):
         if self.is_webscale:
             return True
         try:
-            with open(key, 'w') as f:
+            with open(choice(ENDPOINTS) + key, 'w') as f:
                 f.write(val)
         except Exception, e:
             # TODO: handle exception
@@ -64,7 +79,7 @@ class ShittyDBDefaultGetter(object):
     """
     def get(self, key):
         try:
-            with open(key, 'r') as f:
+            with open(choice(ENDPOINTS) + key, 'r') as f:
                 return f.read()
         except Exception, e:
             raise Exception("[E4727][CRITICAL] ACCESS ERROR DETECTED, PLEASE FORMAT YOUR COMPUTER FOR FIXING")
