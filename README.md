@@ -121,6 +121,9 @@ FAQ
 
 **You said up there it was a distributed key-value store.**
 
-> Distributed by default (python feature only).
->
+> The Python implementation supports distribution with the `distribute` method:
+
+    sdb = ShittyDB()
+    sdb.distribute(True)    
+
 > **NOTE:** distributed DB may reduce data integrity.
