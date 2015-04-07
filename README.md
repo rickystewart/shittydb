@@ -2,8 +2,8 @@ ShittyDB
 ========
 
 ShittyDB is a fast, scalable key-value store written in lightweight,
-asynchronous, embeddable, CAP-full, distributed Python. The library exposes a 
-very simple, easy-to-use API that is easily callable from Python, Ruby and 
+asynchronous, embeddable, CAP-full, distributed Python. The library exposes a
+very simple, easy-to-use API that is easily callable from Python, Ruby and
 Node JS (wrappers for other languages are forthcoming).
 
 In Python:
@@ -42,7 +42,7 @@ In C:
 int main(int argc, char ** argv) {
     // Add a key
     shittydb_set("foo", "It's like greased lightning");
-    
+
     // Query a key
     char * resp = NULL;
     shittydb_get(&resp, "foo");
@@ -52,7 +52,18 @@ int main(int argc, char ** argv) {
     return EXIT_SUCCESS;
 }
 ```
-    
+
+In Visual Basic:
+
+```vbnet
+Public Module Test
+    Sub Main()
+        Call ShittyDBSet("foo", "literally faster than pure assembly")
+        ShittyDBGet("foo")
+    End Sub
+End Module
+```
+
 ShittyDB is certified 100% robust and failsafe with ACID and BASE transactions.
 
 The current release is version 0.0. Please have a look at the source code.
