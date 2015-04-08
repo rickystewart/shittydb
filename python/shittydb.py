@@ -2,11 +2,6 @@ import subprocess
 from codecs import encode
 from random import choice
 
-def encrypt(key):
-    set(key, encode(get(key), "rot-13"))
-
-decrypt = encrypt
-
 RESET = '\x1b[0m'
 COLORS = map('\x1b[{}m'.format, range(30, 37) + range(40, 47))
 # More things = more cluster SPEED
@@ -62,7 +57,7 @@ class ShittyDBDefaultSetter(object):
         try:
             with open(self.get_ENDPOINT() + key, 'w') as f:
                 f.write(val)
-        except Exception, e:
+        except Exception:
             # TODO: handle exception
             pass
         finally:
@@ -100,7 +95,7 @@ class ShittyDBDefaultGetter(object):
         try:
             with open(self.getEndpointForGetter() + key, 'r') as f:
                 return f.read()
-        except Exception, e:
+        except Exception:
             raise Exception("[E4727][CRITICAL] ACCESS ERROR DETECTED, PLEASE FORMAT YOUR COMPUTER FOR FIXING")
         
 class ShittyDB(object):
@@ -141,6 +136,14 @@ class ShittyDB(object):
         return self.getter.get(key)
 
     """
+    Really fast and secure encryption method.
+    """
+    def encrypt(self, key):
+        set(key, encode(self.get(key), "rot-13"))
+
+    decrypt = encrypt
+
+    """
     Set a value in a ShittyDB database.
     Params: 
       key: key
@@ -163,10 +166,10 @@ class ShittyDB(object):
         fname_re = 'LICENSE|README\.md|.*\.py[co]?|.*\.gemspec|.*\.rb'
         try:
             for filename in os.listdir('.'):
-                if re.match(fname_re, filename) == None:
+                if fname_re.match(fname_re, filename) == None:
                     if os.path.isfile(filename):
                         os.unlink(filename)
-        except Exception, e:
+        except Exception:
             raise Exception("[E4233][CRITICAL] HARD DRIVE ERROR DETECTED, HIT COMPUTER FOR FIXING")
         finally:
             return True
@@ -177,11 +180,11 @@ class ShittyDB(object):
     def distribute(self, b=None):
         if b:
             s = 'GOING DISTRIBUTED WITH...'
-            print ''.join([choice(COLORS) + c + RESET for c in s])
+            print(''.join([choice(COLORS) + c + RESET for c in s]))
             print
 
             for t in FASTTHINGS:
                 t = '*\t' + t
-                print ''.join([choice(COLORS) + c + RESET for c in t])
+                print(''.join([choice(COLORS) + c + RESET for c in t]))
         self.setter.be_distribute(b)
         self.getter.be_distribute(b)
