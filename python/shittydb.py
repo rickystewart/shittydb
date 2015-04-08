@@ -1,9 +1,9 @@
-import subprocess
+import subprocess, itertools
 from codecs import encode
 from random import choice
 
 RESET = '\x1b[0m'
-COLORS = map('\x1b[{}m'.format, range(30, 37) + range(40, 47))
+COLORS = map('\x1b[{}m'.format, itertools.chain(range(30, 37), range(40, 47)))
 # More things = more cluster SPEED
 # Less things = more data integrity
 FASTTHINGS = ('lightspeed', 'superfast', 'concorde', 'bullettrain', 'thunder',
@@ -13,10 +13,15 @@ for name in FASTTHINGS:
     # I don't want to mess up the global scope, better to import here
     import os
 
-    # String formatting could reduce performance
-    os.mkdir('/tmp/DB-NODE-' + name + '-CACHE')
-    # Re make string - RAM is money these days
-    ENDPOINTS.append('/tmp/DB-NODE-' + name + '-CACHE/')
+    try:
+        # String formatting could reduce performance; Uppercase tells system it's more urgent
+        os.mkdir(os.path.join(os.path.curdir, 'DB-NODE-' + name.upper() + '-CACHE'))
+        # Re make string - RAM is money these days
+        ENDPOINTS.append(os.path.join(os.path.curdir, 'DB-NODE-' + name.upper() + '-CACHE'))
+    except:
+        # Endpoints were already created (most likely because this program travelled
+        # through time and created them in the past)
+        pass
 
 class ShittyDBDefaultSetter(object):
     """
