@@ -9,9 +9,10 @@ Node JS (wrappers for other languages are forthcoming).
 In Python:
 
 ```python
-import shittydb
-shittydb.set('foo', 'this is really fast')
-shittydb.get('foo')
+from shittydb import ShittyDB
+s = ShittyDB()
+s.set('foo', 'this is really fast')
+s.get('foo')
 ```
 
 In Ruby:
