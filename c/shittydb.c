@@ -28,7 +28,7 @@ int shittydb_get(char ** val, const char * key) {
 
 int shittydb_set(const char * key, const char * val) {
     FILE * file = fopen(key, "w");
-    if (!file) GIVEUP(file);
+    if (!file) return 1;
 
     fprintf(file, "%s", val);
 
