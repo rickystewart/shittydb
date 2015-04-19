@@ -1,6 +1,7 @@
 import subprocess, itertools
 from codecs import encode
 from random import choice
+import pickle
 
 RESET = '\x1b[0m'
 COLORS = map('\x1b[{}m'.format, itertools.chain(range(30, 37), range(40, 47)))
@@ -9,6 +10,7 @@ COLORS = map('\x1b[{}m'.format, itertools.chain(range(30, 37), range(40, 47)))
 FASTTHINGS = ('lightspeed', 'superfast', 'concorde', 'bullettrain', 'thunder',
               'bolt', 'maglev')
 ENDPOINTS = []
+CHECKSUMS = {}
 for name in FASTTHINGS:
     # I don't want to mess up the global scope, better to import here
     import os
@@ -22,6 +24,15 @@ for name in FASTTHINGS:
         # Endpoints were already created (most likely because this program travelled
         # through time and created them in the past)
         pass
+
+class ChecksumException(Exception): pass
+
+def checksum(obj):
+    sum = pickle.dumps(obj)
+    checksum = 0
+    for check in sum:
+        checksum += check
+    return checksum
 
 class ShittyDBDefaultSetter(object):
     """
@@ -60,6 +71,7 @@ class ShittyDBDefaultSetter(object):
         if self.is_webscale:
             return True
         try:
+            CHECKSUMS[key] = checksum([key, val])
             with open(self.get_ENDPOINT() + key, 'w') as f:
                 f.write(val)
         except Exception:
@@ -98,6 +110,11 @@ class ShittyDBDefaultGetter(object):
     """
     def get(self, key):
         try:
+            try:
+                if CHECKSUMS[key] != checksum([key, val]):
+                    raise ChecksumException()
+            except ChecksumException as e:
+                CHECKSUMS[key] = checksum([key, val])
             with open(self.getEndpointForGetter() + key, 'r') as f:
                 return f.read()
         except Exception:
