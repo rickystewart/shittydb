@@ -1,0 +1,26 @@
+{
+  "name": "shittydb",
+  "version": "1.0.0",
+  "description": "A confoundingly fast key-value store",
+  "main": "nodejs/shittydb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theseoafs/shittydb.git"
+  },
+  "keywords": [
+    "shittydb",
+    "shitty",
+    "database",
+    "db",
+    "fast"
+  ],
+  "author": "theseoafs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theseoafs/shittydb/issues"
+  },
+  "homepage": "https://github.com/theseoafs/shittydb"
+}
